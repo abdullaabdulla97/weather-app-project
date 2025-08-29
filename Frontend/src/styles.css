@@ -1,0 +1,743 @@
+/* General Start */
+/*Set a full screen background image, lock it, and set global typography*/
+body { /*Select the whole page*/
+    background: url(/public/images/background.jpg) no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    margin: 0;
+    font-family: "Inter", Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+/*Container that holds the whole app content area*/
+.weather-app { /*Wrapper for the layout columns*/
+    max-width: 1100px;
+    margin: 0 1rem;
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: row;
+    gap: 2.5rem;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/*Hide the Webkit scrollbars (Chrome/Safari) inside .weather-app*/
+.weather-app::-webkit-scrollbar { /*Target the scrollbar pseudo element*/
+    display: none;
+}
+
+/*Shared flex column structure for both panels*/
+.left-panel, .right-panel { /*Match both sides*/
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/*Left column sizing*/
+.left-panel { /*Left sidebar column*/
+    flex: 1 1 360px;
+    max-width: 430px;
+    min-width: 440px;
+}
+
+/*Right column sizing*/
+.right-panel { /*Main content column*/
+    flex: 2 1 700px;
+    max-width: 980px;
+    margin-top: 4.8rem;
+}
+
+
+/* General Style End */
+
+/* SearchCity Style Start */
+
+/*Pill shaped search input wrapper*/
+.search-city-container { /*Wrapper around the search input + icon*/
+    display: flex;
+    align-items: center;
+    background: #222942;
+    border-radius: 2rem;
+    padding: 0.3rem 1.7rem 0.3rem 1.1rem;
+    width: 100%;
+    max-width: 270px;
+    height: 54px;
+    margin-bottom: 1.4rem;
+    box-sizing: border-box;
+    position: relative;
+    gap: 1rem;
+}
+
+.search-city-icon {
+    width: 1.8rem;
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+    color: white;
+}
+
+/*The actual text input*/
+.search-city-bar { /*The input element*/
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: white;
+    font-size: 1.3rem;
+    font-weight: 500;
+    padding: 0;
+    margin: 0;
+}
+
+/*Placeholder styling for the search input*/
+.search-city-bar::placeholder { /*Placeholder text inside the input*/
+    color: white;
+    opacity: 0.70;
+    font-size: 1.19rem;
+}
+
+/* SearchCity Style End*/
+
+
+/* TemperatureConversion Style Start */
+
+/*Toggle container (rounded capsule behind the two buttons*/
+.temperature-toggle-container { /*Wrapper for the two toggle buttons*/
+    display: flex;
+    align-items: center;
+    background: #222942;
+    border-radius: 999px;
+    padding: 0.19rem 0.51rem;
+    width: 112px;
+    height: 45px;
+    position: relative;
+}
+
+/*Row that holds the search input + toggle side by side*/
+.search-and-toggle { /*Container for top controls*/
+    display: flex;
+    flex-direction: row;
+    gap: 68.6rem;
+}
+
+/*Individual toggle buttons*/
+.temperature-toggle-btn { /*Both unit buttons share this base style*/
+    flex: 1 1 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 38px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: white;
+    background: transparent;
+    border: none;
+    transition: background 0.2s, color 0.2s;
+    z-index: 1;
+}
+
+/*Active state for the selected unit*/
+.temperature-toggle-btn.active { /*When the button is the selected unit*/
+    background: white;
+    color: #222942;
+    font-weight: 700;
+}
+
+/*Small spacing/tweaks for unit label*/
+.temperature-toggle-unit { /*Span around the unit text*/
+    margin: 0 0.08rem;
+    font-size: 1.2rem;
+}
+/* TemperatureConversion Style End */
+
+
+/* CurrentWeather Style Start */
+
+/*Whole current weather card container*/
+.current-weather-card { /*Big card with temperature + city information*/
+    background: #222942;
+    border-radius: 26px;
+    padding: 2.2rem 2.1rem 1.9rem 2.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    min-width: 345px;
+    max-width: 100vw;
+    min-height: 180px;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+/*Left column (big temperature + main condition)*/
+.current-weather-left { /*Left section of the card*/
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.3rem;
+}
+
+/*Right column (city name, time, wind, min/max)*/
+.current-weather-right { /*Right section of the card*/
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.3rem;
+    min-width: 148px;
+}
+
+/*Big temperature text*/
+.current-weather-temperature { /*Temperature number with degree symbol*/
+    font-size: 4.9rem;
+    font-weight: 700;
+    color: white;
+    line-height: 1;
+    margin-bottom: 0.7rem;
+}
+
+/*Main condition text (e.g., Clouds)*/
+.current-weather-main { /*Label next to icon*/
+    font-size: 1.14rem;
+    color: #b5bcc7;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+/*Weather icon next to main condition*/
+.current-weather-condition-icon { /*Current condition icon*/
+    width: 45px;
+    height: 45px;
+    margin-right: 0.32rem;
+}
+
+/*"Feels like" small text*/
+.current-weather-feelslike { /*Secondary detail*/
+    color: #e0e5ef;
+    font-size: 1.1rem;
+    margin-top: 0.22rem;
+}
+
+/*City name on the right column*/
+.current-weather-city { /*City label*/
+    font-size: 1.63rem;
+    color: white;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+/*Local time text*/
+.current-weather-time { /*Wind information line*/
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #c1cce7;
+    margin-bottom: 1.1rem;
+}
+
+/*Wind row container (icon + value)*/
+.current-weather-wind-row { /*Wind information line*/
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    color: white;
+    font-size: 1.3rem;
+    margin-top: 2.86rem;
+}
+
+/*Tweak vertical alignment for wind icon*/
+.current-weather-wind-icon { /*Wind icon image*/
+    vertical-align: middle;
+}
+
+/*Wind speed value*/
+.current-weather-wind-value { /*Wind speed text*/
+    font-size: 1.09rem;
+    font-weight: 600;
+    color: white;
+}
+
+/*Min/Max line at the bottom-right*/
+.current-weather-minmax { /*Day range line*/
+    font-size: 1.15rem;
+    color: #d7d8e4;
+    margin-top: 2.4rem;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+}
+
+/* CurrentWeather Style End */
+
+
+
+/* HourlyForecast Style Start */
+
+/*Section wrapper for hourly cards*/
+.hourly-forecast-container { /*Container for 8 hourly items*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1.2rem 0 2.4rem 0;
+    padding: 0;
+    max-width: 1110px;
+    width: 100%;
+    background: transparent;
+}
+
+/*Grid row of 8 equally sized items*/
+.hourly-forecast-row { /*Grid containing the cards*/
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 1.2rem;
+    width: 100%;
+}
+
+/*Individual hourly card*/
+.hourly-forecast-item { /*One 3-hour forecast card*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #222942;
+    border-radius: 26px;
+    padding: 1.5rem 1.1rem 1.2rem 0.8rem;
+    width: 75px;
+    min-width: 73px;
+    min-height: 247px;
+    margin-top: 0.4rem;
+}
+
+/*Time label at the top of hourly card*/
+.hourly-forecast-time { /*Time text e.g., "2:00 PM"*/
+    font-size: 1.09rem;
+    font-weight: 500;
+    color: white;
+    margin-bottom: 1.9rem;
+}
+
+/*Small divider line under the time*/
+.hourly-forecast-divider { /*Decorative divider*/
+    width: 100%;
+    height: 3px;
+    background: black;
+    margin: 0.13rem 0 0.8rem 0;
+    border-radius: 2px;
+}
+
+/*Weather icon inside hourly card*/
+.hourly-forecast-icon { /*Icon image*/
+    width: 51px;
+    height: 51px;
+    margin-bottom: 0.09rem;
+    margin-top: 0.16rem;
+}
+
+/*Condition label e.g., "Clouds"*/
+.hourly-forecast-weather { /*Condition text*/
+    font-size: 1.01rem;
+    color: #b5bcc7;
+    margin-bottom: 0.9rem;
+    margin-top: 0.02rem;
+    font-weight: 400;
+}
+
+/*Temperature value at bottom*/
+.hourly-forecast-temperature { /*Temperature text*/
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: white;
+    margin-top: 1.4rem;
+    margin-left: 0.5rem;
+}
+
+/* HourlyForecast Style End */
+
+
+/* DailyForecast Style Start */
+
+/*Outer wrapper for the 5-day section*/
+.daily-forecast-container { /*Container for list of days*/
+    background: transparent;
+    border-radius: 20px;
+    padding: 0;
+    margin: -1.33rem 0 0 0;
+    max-width: 98vw;
+    width: 100%;
+}
+
+/*Title: "5-day forecast"*/
+.daily-forecast-title { /*Section heading*/
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 1rem;
+    margin-left: 0.5rem;
+}
+
+/*Single row for a day (icon + labels + bar)*/
+.daily-forecast-row { /*One day's summary row*/
+    display: flex;
+    align-items: center;
+    background: #222942;
+    border-radius: 16px;
+    margin-bottom: 1rem;
+    padding: 1.08rem 1.1rem 1.05rem 1.1rem;
+    box-sizing: border-box;
+    min-height: 64px;
+}
+
+/*Day label (Today, Mon, Tue, ...)*/
+.daily-forecast-day { /*Day string*/
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: white;
+    width: 66px;
+    min-width: 48px;
+    flex-shrink: 0;
+}
+
+/*Weather icon (day summary)*/
+.daily-forecast-icon { /*Day's icon*/
+    width: 44px;
+    height: 44px;
+    margin: 0 0.6rem 0 0.2rem;
+    flex-shrink: 0;
+}
+
+/*Condition label (e.g., "Rain")*/
+.daily-forecast-main { /*Condition text*/
+    font-size: 0.97rem;
+    color: #b0b9c8;
+    width: 63px;
+    min-width: 50px;
+    flex-shrink: 0;
+    margin-right: 0.7rem;
+}
+
+/*Min or Max temperature (left/right of bar)*/
+.daily-forecast-temperature { /*Temperature number*/
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: white;
+    margin: 0 0.82rem 0 0.44rem;
+    min-width: 32px;
+    text-align: right;
+}
+
+/*The background bar that represents the temperature range*/
+.daily-forecast-bar { /*Range bar container*/
+    flex: 1 1 120px;
+    height: 7px;
+    background: #181c23;
+    border-radius: 6px;
+    margin: 0 0.75rem;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    min-width: 30px;
+    max-width: 640px;
+}
+
+/*The filled portion of the range bar (min -> max)*/
+.daily-forecast-bar-fill { /*Actual range indicator*/
+    position: absolute;
+    height: 100%;
+    background: #729af8;
+    border-radius: 8px;
+    z-index: 2; 
+}
+
+/* DailyForecast Style End */
+
+
+
+/* CityWeather Style Start */
+
+/*Section spacing for the city mini-cards*/
+.city-weather-section { /*Wrapper for "Other large cities"*/
+    margin: 0 0 2.1rem 0;
+    padding: 0;
+}
+
+/*Section title*/
+.city-weather-title { /*Title for the city list*/
+    color: white;
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 1.05rem;
+    margin-left: 0.5rem;
+}
+
+/*Each city card container*/
+.city-weather-card { /*Single city weather card*/
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    background: #222942;
+    border-radius: 1.7rem;
+    padding: 1.6rem 1.7rem 1.4rem 1.4rem;
+    margin-bottom: 1.2rem;
+    max-width: 480px;
+    min-width: 210px;
+}
+
+/*Left column with country, city, description*/
+.city-weather-details { /*Text block on left*/
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+/*Country text (muted)*/
+.city-weather-country { /*Country/region label*/
+    color: #b8bac8;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 0.15rem;
+}
+
+/*City name (prominent)*/
+.city-weather-name { /*City name text*/
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.34rem;
+    line-height: 1.11;
+}
+
+/*Small description line*/
+.city-weather-description { /*Weather description text*/
+    color: #f1f2fa;
+    opacity: 0.7;
+    font-size: 0.95rem;
+    margin-top: 0.4rem;
+    font-weight: 400;
+}
+
+/*Right column (icon + temperature)*/
+.city-weather-main { /*Right side container*/
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+/*Weather icon on the right*/
+.city-weather-icon { /*Icon image*/
+    width: 39px;
+    height: 39px;
+    margin-right: 0.15rem;
+}
+
+/*Temperature on the city card*/
+.city-weather-temperature { /*Temperature text*/
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 0.3rem;
+    margin-right: 1.6px;
+}
+
+/* CityWeather Style End */
+
+/*Responsive Adjustment Start */
+@media (max-width: 1000px) { /*Apply styles on tablets/medium screens*/
+    .weather-app {
+        flex-direction: column;
+        max-width: 98vw;
+        gap: 1.5rem;
+        padding: 1rem 0.5rem;
+    }
+    .left-panel, .right-panel {
+        max-width: 100vw;
+        gap: 1rem;
+        min-width: unset;
+    }
+    .search-and-toggle {
+        flex-direction: row;
+        justify-content: center;
+        gap: 4.9rem;
+    }
+
+    .hourly-forecast-row {
+        gap: 5rem;
+        justify-content: center;
+        width: 65vw;
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .hourly-forecast-item {
+        min-width: 66px;
+        width: 100px;
+        min-height: 210px;
+        padding: 0.9rem 0.19rem;
+        position: relative;
+        bottom: 7rem;
+    }
+
+    .daily-forecast-row {
+        padding: 0.7rem 0.4rem 0.65rem 0.4rem;
+        min-height: 54px;
+        position: relative;
+        bottom: 5.5rem;
+    }
+
+    .daily-forecast-title {
+        position: relative;
+        bottom: 6rem;
+    }
+
+    .daily-forecast-icon {
+        width: 28px;
+        height: 28px;
+        margin-right: 0.4rem;
+    }
+
+    .daily-forecast-day {
+        font-size: 0.95rem;
+        min-width: 38px;
+    }
+
+    .city-weather-card {
+        flex-direction: row;
+        padding: 1.1rem 1rem;
+        max-width: 98vw;
+        min-width: 0;
+        align-items: flex-start;
+    }
+    .city-weather-main {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 0.4rem;
+    }
+    .city-weather-temperature {
+        margin-left: 0.9rem;
+        margin-bottom: 0.7rem;
+    }
+    .city-weather-icon {
+        margin-bottom: 0.5rem;
+        margin-left: 0.5rem;
+    }
+
+}
+
+@media (max-width: 700px) { /*Apply on phones/smaller devices*/
+    .weather-app {
+        padding: 0.7rem 0.2rem;
+        max-width: 100vw;
+        gap: 0.75rem;
+    }
+    body {
+        background-size: cover;
+        background-position: center;
+    }
+    .search-and-toggle {
+        flex-direction: row;
+        justify-content: center;
+        gap: 4.9rem;
+    }
+    .current-weather-card {
+        flex-direction: row;
+        align-items: flex-start;
+        padding: 1.1rem 0.7rem 1.2rem 0.7rem;
+        min-width: 0;
+        max-width: 98vw;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .current-weather-left,
+    .current-weather-right {
+        min-width: 0;
+        width: 40%;
+        gap: 1rem;
+    }
+    .current-weather-temperature {
+        font-size: 3.0rem;
+        margin-bottom: 0.35rem;
+    }
+    .current-weather-city {
+        font-size: 1.5rem;
+        margin-bottom: 0.13rem;
+        margin-right: 1rem;
+    }
+
+    .current-weather-wind-row {
+        font-size: 1rem;
+        margin-right: 1rem;
+
+    }
+    .current-weather-minmax {
+        font-size: 1rem;
+        margin-right: 1rem;
+        margin-bottom: 1rem;
+    }
+    .current-weather-feelslike {
+        font-size: 1rem;
+        margin-right: 1rem;
+        margin-top: 2rem;
+
+    }
+    .current-weather-time {
+        font-size: 1rem;
+        margin-right: 1rem;
+    }
+    .current-weather-condition-icon {
+        margin-top: 2.5rem;
+    }
+
+    .hourly-forecast-row {
+        justify-content: center;
+        gap: 2rem;
+        width: 80vw;
+        grid-template-columns: repeat(4, 1fr);
+    }
+    .hourly-forecast-item {
+        min-width: 74px;
+        width: 80px;
+        min-height: 200px;
+        padding: 0.7rem 0.18rem;
+    }
+    .left-panel, .right-panel {
+        gap: 1rem;
+    }
+
+    .city-weather-card {
+        flex-direction: row;
+        padding: 1.1rem 1rem;
+        max-width: 98vw;
+        min-width: 0;
+        align-items: flex-start;
+    }
+    .city-weather-main {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 0.4rem;
+    }
+    .city-weather-temperature {
+        margin-left: 0.9rem;
+        margin-bottom: 0.7rem;
+    }
+    .city-weather-icon {
+        margin-bottom: 0.5rem;
+        margin-left: 0.5rem;
+    }
+}
+/*Responsive Adjustment End */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
