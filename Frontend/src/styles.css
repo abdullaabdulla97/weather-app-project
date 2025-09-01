@@ -792,7 +792,7 @@ body { /*Select the whole page*/
   .hourly-forecast-container {
     margin: 0.8rem 0 0 0;
     width: 100%;
-    min-width: 290px;
+    min-width: 260px;
     position: relative;
     bottom: 70px;
   }
