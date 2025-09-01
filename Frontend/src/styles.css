@@ -726,6 +726,7 @@ body { /*Select the whole page*/
     }
 }
 
+
 @media (max-width: 480px) { /* For mobile devices */
   
   .weather-app {
@@ -769,7 +770,6 @@ body { /*Select the whole page*/
 }
 
   .temperature-toggle-container {
-    width: 96px;
     height: 38px;
     padding: 0.15rem 0.4rem;
   }
@@ -786,20 +786,20 @@ body { /*Select the whole page*/
     padding: 1rem 1rem;
     width: 100%;
     max-width: 100%;
-    min-width: 365px;
+    min-width: 360px;
   }
 
   .hourly-forecast-container {
     margin: 0.8rem 0 0 0;
     width: 100%;
-    max-width: 100%;
+    min-width: 300px;
     position: relative;
     bottom: 70px;
   }
 
   .hourly-forecast-row {
     grid-template-columns: repeat(2, 1fr);
-    gap: 0.75rem;
+    gap: 2rem;
     width: 100%;
     justify-content: stretch;
   }
@@ -832,7 +832,7 @@ body { /*Select the whole page*/
 
 .daily-forecast-container {
     width: 100%;
-    min-width: 361px;
+    min-width: 355px;
 }
   .daily-forecast-title {
     font-size: 1.2rem;
@@ -868,12 +868,13 @@ body { /*Select the whole page*/
     height: 6px; 
     margin: 0 0.5rem; 
 }
+
 .city-weather-section {
     margin-top: 20px;
 }
   .city-weather-card {
-    max-width: 100%;
-    width: 93%;
+    width: 328px;
+    min-width: 250px;
     padding: 1rem;
     border-radius: 1rem;
   }
@@ -886,11 +887,13 @@ body { /*Select the whole page*/
   .city-weather-temperature { 
     font-size: 1.25rem; 
 }
+
   body {
     background-position: center;
     background-size: cover;
   }
 }
+
 /*Responsive Adjustment End */
 
 
