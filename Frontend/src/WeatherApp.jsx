@@ -46,14 +46,28 @@ function WeatherApp() { // main component function for the whole app
 
                 // Daily forecast for the first 5 days by grouping them by date
                 const storage = {} // empty object for storing the grouped entries
+                const tz = currentWeatherData.timezone || 0; // timezone offset in seconds for the selected city (0 if null)
                 for (let i = 0; i < forecastData.list.length; i++) { // loops through each forecast entry
                     const entry = forecastData.list[i]; // gets the forecast entry at the specific index
-                    const date = entry.dt_txt.split(" ")[0]; // extracts the date
-                    if (!storage[date]) { // if the date is not already in the storage
-                        storage[date] = []; // then an empty array is made to store it in there
+
+                    // Converst each 3h point to the city's local date (YYYY-MM-DD)
+                    const local = new Date((entry.dt + tz) * 1000);
+                    const year = local.getUTCFullYear();
+                    let month = local.getUTCMonth() + 1;
+                    if (month < 10) {
+                        month = "0" + month;
+                    }
+                    let day = local.getUTCDate();
+                    if (day < 10) {
+                        day = "0" + day;
                     }
 
-                    storage[date].push(entry); // the foecast entry gets added to the array
+                    const dateKey = year + "-" + month + "-" + day;
+                    // Group entries by date in the storage object
+                    if (!storage[dateKey]) { 
+                        storage[dateKey] = []; // If the date key does not exist, creates an empty array
+                    }
+                    storage[dateKey].push(entry); // Then adds the forecast entry to the array for that date
                 }
 
                 const dates = Object.keys(storage).slice(0, 5); // gets all date keys for first 5 days
@@ -81,6 +95,7 @@ function WeatherApp() { // main component function for the whole app
 
                     dailySummary.push({ // adds the daily summary to the array
                         date, // the date
+                        timeStamp: dayEntry[0].dt, // Includes UTC timestamp in seconds
                         minimumTemperature, // minimum temp that day
                         maximumTemperature, // maximum temp that day
                         main: dayEntry[0].weather[0].main, // the weather for the initial forecast
@@ -143,7 +158,7 @@ function WeatherApp() { // main component function for the whole app
                     forecastData={hourlyForecast} // Pass hourly forecast data
                     cityTimeZone={currentWeather ? currentWeather.timezone : 0} // Pass city timezone (0 if null)
                 /> 
-                <DailyForecast forecastData={dailyForecast}/> {/*Show 5-day forecast summary */}   
+                <DailyForecast forecastData={dailyForecast} timeZoneOffset={currentWeather ? currentWeather.timezone : 0}/> {/*Show 5-day forecast summary */}   
             </div>
         </div>
        );
