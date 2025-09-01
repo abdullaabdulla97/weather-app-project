@@ -792,7 +792,7 @@ body { /*Select the whole page*/
   .hourly-forecast-container {
     margin: 0.8rem 0 0 0;
     width: 100%;
-    min-width: 300px;
+    min-width: 290px;
     position: relative;
     bottom: 70px;
   }
@@ -874,7 +874,7 @@ body { /*Select the whole page*/
 }
   .city-weather-card {
     width: 328px;
-    min-width: 250px;
+    min-width: 270px;
     padding: 1rem;
     border-radius: 1rem;
   }
