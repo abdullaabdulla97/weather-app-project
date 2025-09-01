@@ -874,7 +874,7 @@ body { /*Select the whole page*/
 }
   .city-weather-card {
     width: 328px;
-    min-width: 270px;
+    min-width: 300px;
     padding: 1rem;
     border-radius: 1rem;
   }
